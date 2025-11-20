@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="data.js"></script>
+    <style>
+      ul {
+        list-style: none;
+      }
+      button {
+        width: 79px;
+        height: 22px;
+        text-align: center;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="data"></div>
+
+    <script type="text/javascript">
+      let i = 0;
+      let score = 0;
+
+      function reload() {
+        const data = document.getElementById("data");
+        data.innerHTML = "";
+        if (i < quizData.length) {
+          let question = document.createElement("div");
+          let questionData = document.createTextNode(quizData[i].question);
+          question.appendChild(questionData);
+          data.appendChild(question);
+
+          let ul = document.createElement("ul");
+          Object.keys(quizData[i]).forEach((key) => {
+            if (key != "question" && key != "correct") {
+              let li = document.createElement("li");
+
+              let radio = document.createElement("input");
+              radio.setAttribute("type", "radio");
+              radio.setAttribute("name", "quiz");
+              radio.setAttribute("value", `${key}`);
+              radio.setAttribute("id", `${key}`);
+
+              let label = document.createElement("label");
+              label.setAttribute("for", `${key}`);
+
+              let option = document.createTextNode(`${quizData[i][key]}`);
+              label.appendChild(option);
+              li.appendChild(radio);
+              li.appendChild(label);
+              ul.appendChild(li);
+            }
+          });
+          data.appendChild(ul);
+
+          let button = document.createElement("button");
+          let buttonText = document.createTextNode("submit");
+          button.appendChild(buttonText);
+          button.setAttribute("onClick", "onClicked()");
+          data.appendChild(button);
+        } else {
+          document.getElementById("data").innerHTML = "";
+          i = 0;
+          let result = document.createElement("div");
+          let resultValue = document.createTextNode(
+            `your score is ${score}/${quizData.length}`
+          );
+          result.appendChild(resultValue);
+          data.appendChild(result);
+
+          let button = document.createElement("button");
+          let buttonText = document.createTextNode("Restart");
+          button.appendChild(buttonText);
+          button.setAttribute("onClick", "onComplete()");
+          data.appendChild(button);
+
+          score = 0;
+        }
+      }
+      reload();
+
+      function onComplete() {
+        i = 0;
+        reload();
+      }
+
+      function onClicked() {
+        let options = document.getElementsByName("quiz");
+        let correct;
+        for (let j = 0; j < options.length; j++) {
+          if (options[j].checked) correct = options[j].id;
+        }
+        if (correct == quizData[i].correct) score++;
+
+        i++;
+        reload();
+      }
+    </script>
+  </body>
+</html>

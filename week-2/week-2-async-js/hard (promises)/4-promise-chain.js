@@ -6,18 +6,38 @@
  */
 
 function wait1(t) {
-
+    return new Promise((resolve) => {
+        let date = new Date().getTime();
+        while (new Date().getTime() < date + t * 1000);
+        resolve();
+    })
 }
 
 function wait2(t) {
-
+    return new Promise((resolve) => {
+        let date = new Date().getTime();
+        while (new Date().getTime() < date + t * 1000);
+        resolve();
+    })
 }
 
 function wait3(t) {
-
+    return new Promise((resolve) => {
+        let date = new Date().getTime();
+        while (new Date().getTime() < date + t * 1000);
+        resolve();
+    })
 }
 
-function calculateTime(t1, t2, t3) {
+async function calculateTime(t1, t2, t3) {
+    let date = new Date().getTime();
+
+    await new Promise((resolve) => {
+        wait1(t1).then(resolve);
+    }).then(wait2(t2))
+        .then(wait3(t3));
+
+    return new Date().getTime() - date;
 
 }
 

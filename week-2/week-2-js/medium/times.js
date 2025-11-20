@@ -9,5 +9,17 @@ There is no automated test for this one, this is more for you to understand time
 */
 
 function calculateTime(n) {
-    return 0.01;
+    let before = new Date();
+    let sum = 0;
+    console.log("before exection" + before.getMilliseconds());
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+    }
+    //console.log("after exection");
+    let after = new Date();
+    let time = after.getMilliseconds() - before.getMilliseconds();
+    console.log(time / 1000.0);
+    return time / 1000;
 }
+
+calculateTime(100);

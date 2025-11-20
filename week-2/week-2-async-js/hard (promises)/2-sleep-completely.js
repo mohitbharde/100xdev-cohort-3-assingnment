@@ -4,7 +4,15 @@
  * the function should return a promise just like before
  */
 
-function sleep(milliseconds) {
+async function sleep(milliseconds) {
+    return new Promise((resolve) => {
+        let time = new Date().getTime();
+        while (new Date().getTime() < time + milliseconds);
+        resolve();
+    })
+    // .then(() => {
+    //     console.log("hello ji ");
+    // })
 }
-
+// console.log(sleep(8000));
 module.exports = sleep;

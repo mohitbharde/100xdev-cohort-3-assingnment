@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="stylee.css" />
+  </head>
+  <body>
+    <div id="color-item">
+      <button class="color-item" onclick="changeColor('red')">red</button>
+      <button class="color-item" onclick="changeColor('blue')">blue</button>
+      <button class="color-item" onclick="changeColor('black')">black</button>
+      <button class="color-item" onclick="changeColor('orange')">orange</button>
+      <button class="color-item" onclick="changeColor('green')">green</button>
+      <button class="color-item" onclick="changeColor('yellow')">yellow</button>
+    </div>
+    <script>
+      function changeColor(color) {
+        document.body.style.backgroundColor = color;
+        console.log(color);
+      }
+    </script>
+  </body>
+</html>
