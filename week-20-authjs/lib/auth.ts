@@ -20,20 +20,4 @@ export const NEXT_AUTH_CONFIG = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    jwt: async ({ user, token }: any) => {
-      if (user) {
-        token.uid = user.id;
-      }
-      console.log("inside the callbacks/jwt/token: ", token);
-      return token;
-    },
-    session: ({ session, token, user }: any) => {
-      if (session.user) {
-        session.user.id = token.uid;
-      }
-      console.log("inside the callbacks/session/session: ", session);
-      return session;
-    },
-  },
 };
